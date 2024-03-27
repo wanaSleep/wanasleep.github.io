@@ -1,0 +1,43 @@
+<style>
+.hidden-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out; /* 添加过渡动画 */
+}
+
+/* 当子列表处于展开状态时的CSS */
+.expanded .hidden-list {
+    max-height: 1000px; /* 这里设置一个足够大的值来保证所有内容都能显示 */
+}
+</style>
+
+<ul id="animatedList">
+    <li>
+        <div class="list-header" onclick="toggleList(this)">版本列表
+            <span class="expand-icon">+</span>
+        </div>
+        <ul class="hidden-list">
+            <li onclick="alert('点击了1.20.70')">1.20.70</li>
+            <li>1.20.60</li>
+            <li>1.20.50</li>
+        </ul>
+    </li>
+    <!-- 更多类似的列表项 -->
+</ul>
+
+
+<script>function toggleList(header) {
+    const sublist = header.nextElementSibling;
+    const isExpanded = sublist.classList.contains('expanded');
+
+    if (isExpanded) {
+        sublist.style.maxHeight = '0px';
+        sublist.classList.remove('expanded');
+        header.querySelector('.expand-icon').textContent = '+';
+    } else {
+        sublist.style.maxHeight = sublist.scrollHeight + 'px'; // 获取实际高度以便展开
+        sublist.classList.add('expanded');
+        header.querySelector('.expand-icon').textContent = '-';
+    }
+}
+</script>
