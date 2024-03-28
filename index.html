@@ -1,19 +1,44 @@
-<style>
-.hidden-list {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--random-duration) ease-out; /* 添加过渡动画,使用一个随机值，由zhuawa精神提供 */
-}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Canvas Raindrops</title>
+        <style>
+            .hidden-list {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--random-duration) ease-out; /* 添加过渡动画,使用一个随机值，由zhuawa精神提供 */
+            }
+            
+            /* 当子列表处于展开状态时的CSS */
+            .expanded .hidden-list {
+                max-height: 1000px; /* 设置一个足够大的值来保证所有内容都能显示 */
+            }
+            canvas {
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    body {
+                        
+                        background: #1c1c1c; /* 一个暗色背景 */
+                    }
+            a {
+                color: #F1F1F1;
+                }
+            </style>
+    </head>
 
-/* 当子列表处于展开状态时的CSS */
-.expanded .hidden-list {
-    max-height: 1000px; /* 设置一个足够大的值来保证所有内容都能显示 */
-}
-</style>
 
-<body>
+<body style="color: white;">
+
+
     
-    <p>最新版</p>
+    <canvas id="rainCanvas" style="z-index: -13;"></canvas>
+    <p>最新版本</p>
     <a id="last"> </a>
 
     <br>
@@ -45,10 +70,10 @@
 
     <font style="bottom: 10px;left:10px;position: absolute;">三分热度，也会有三分收获</font>
 
-</body>
 
 
 <script>
+
 const awa = Math.random()>0.5;
 const bunibuni = () => document.documentElement.style.setProperty('--random-duration', awa ? '0.5s' : Math.floor(Math.random() * 10) + 's'); // 生成1到10秒之间的随机整数值
 
@@ -74,3 +99,85 @@ document.getElementById("last").innerHTML = document.getElementById("versionList
 
 
 </script>
+
+
+
+<script>
+    const canvas = document.getElementById('rainCanvas');
+    const ctx = canvas.getContext('2d');
+    let rainDrops = new Set();
+
+    function createRainDrop() {
+        return {
+            x: Math.random() * canvas.width,
+            y: Math.random() * -300, // 从顶部外开始
+            speed: Math.random() * 2 + 1,
+            size: Math.random() * 30 + 1,
+            alpha: 1
+        };
+    }
+
+    function animate() {
+
+        // 移除旧的雨滴
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+
+
+        if (Math.random() > 0.55) 
+            rainDrops.add(createRainDrop());
+
+
+        // 更新并绘制雨滴
+        rainDrops.forEach(drop=>{ 
+            
+            // 移除旧的雨滴
+            // 更新雨滴位置
+            drop.y += drop.speed;
+            drop.alpha -= 0.003; // 逐渐减小透明度
+
+            // 当雨滴超出屏幕底部时移除它
+            if (drop.y > canvas.height/2) {
+                rainDrops.delete(drop);
+                // rainDrops.add(createRainDrop());
+                return;
+            }
+
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + drop.alpha + ')';
+            ctx.save()
+            
+            // 设置混合模式和透明度
+            // ctx.globalAlpha = drop.alpha;
+            ctx.beginPath();
+
+            // 绘制雨滴
+            // ctx.clearRect(drop.x-5 ,drop.y-5, drop.size+10, drop.size+10);
+            ctx.fillRect(drop.x, drop.y, drop.size, drop.size);
+            // ctx.fill();
+
+            ctx.closePath();
+            ctx.globalAlpha = 1; // 恢复全局透明度
+            
+            ctx.restore();
+        })
+
+        requestAnimationFrame(animate);
+    }
+
+    // 初始化
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // 创建初始的几个雨滴
+    const start = () => {
+        for (let i = 0; i < 10; i++) 
+            rainDrops.add(createRainDrop());
+    };
+    
+    start()
+    // rainDrops.add(createRainDrop());
+    animate(); // 开始动画
+</script>
+
+
+</body>
+</html>
