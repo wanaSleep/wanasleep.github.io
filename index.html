@@ -49,10 +49,11 @@
 
 
 <script>
-const bunibuni = () => document.documentElement.style.setProperty('--random-duration', Math.floor(Math.random() * 10) + 's'); // 生成1到10秒之间的随机整数值
 const awa = Math.random()>0.5;
+const bunibuni = () => document.documentElement.style.setProperty('--random-duration', awa ? '0.5s' : Math.floor(Math.random() * 10) + 's'); // 生成1到10秒之间的随机整数值
+
 function toggleList(header) {
-    awa && bunibuni()
+    bunibuni()
  
     const sublist = header.nextElementSibling;
     const isExpanded = sublist.classList.contains('expanded');
