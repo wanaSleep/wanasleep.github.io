@@ -2,18 +2,18 @@
 .hidden-list {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out; /* 添加过渡动画 */
+    transition: max-height var(--random-duration) ease-out; /* 添加过渡动画,使用一个随机值，由zhuawa精神提供 */
 }
 
 /* 当子列表处于展开状态时的CSS */
 .expanded .hidden-list {
-    max-height: 1000px; /* 这里设置一个足够大的值来保证所有内容都能显示 */
+    max-height: 1000px; /* 设置一个足够大的值来保证所有内容都能显示 */
 }
 </style>
 
 <body>
     
-    最新版
+    <p>最新版</p>
     <a id="last"> </a>
 
     <br>
@@ -49,7 +49,11 @@
 
 
 <script>
+    const bunibuni = () => document.documentElement.style.setProperty('--random-duration', Math.floor(Math.random() * 10) + 's'); // 生成1到10秒之间的随机整数值
+ 
 function toggleList(header) {
+    bunibuni()
+ 
     const sublist = header.nextElementSibling;
     const isExpanded = sublist.classList.contains('expanded');
 
