@@ -145,7 +145,7 @@ document.getElementById("bottomHead").innerHTML = Math.random()>0.3 ? "三分热
 
 
 <script>
-    var rain = true
+    var rain = Math.random()>0.6
     const canvas = document.getElementById('rainCanvas');
     const ctx = canvas.getContext('2d');
     let rainDrops = new Set();
