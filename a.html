@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  /* 定义笑脸方块的基本样式 */
+  .smiling-box {
+    width: 100px;
+    height: 100px;
+    /* background-image: url('6.gif'); */
+     /* 替换为你的笑脸图片路径 */
+    background-color: #08c997;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: dropDown 2s linear forwards; /* 下降动画持续2秒，线性变化，完成后保持状态 */
+  }
+
+  /* 定义动画关键帧 */
+  @keyframes dropDown {
+    0% {
+      top: 0;
+    }
+    /* 将方块移动到视窗高度之外，从而离开可视区域 */
+    70% {
+      top: 70vh; 
+    }
+    90% {
+      top: 9vh;
+    }
+    100% {
+      top: 100vh;
+      dropDown:0%;
+    }
+  }
+
+  @keyframes sway {
+    0%, 100% {
+      transform: translateX(0px); /* 回到初始位置 */
+    }
+    40% {
+      transform: translateX(10px); /* 左右偏移10px */
+    }
+    80% {
+      transform: translateX(-7px); /* 左右偏移10px */
+    }
+    90% {
+      transform: translateX(-3px); /* 左右偏移10px */
+    }
+  }
+
+  .swaying-head {
+    animation: sway 1s ease-in-out infinite; /* 动画名为sway，时长1秒，缓动效果，无限循环 */
+  }
+
+</style>
+</head>
+<body>
+
+<!-- 笑脸方块元素 -->
+<div class="smiling-box">
+    <div class="swaying-head" style="width: 100px;height: 35px;background-color: #4c302e"></div>
+</div>
+
+</body>
+</html>
