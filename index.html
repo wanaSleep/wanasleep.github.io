@@ -30,7 +30,43 @@
                 color: #F1F1F1;
                 }
             </style>
+
+<style>
+    /* 按钮 */
+    .slide-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #fff;
+      color: white;
+      cursor: pointer;
+      
+      border-radius: 100px;
+      transition: transform 0.5s ease-in-out; /* 缓冲效果 */
+    }
+  
+    .weather-clear {
+      transform: translateX(-20px); /* 向左滑动 */
+    }
+  
+    .weather-rain {
+      transform: translateX(20px); /* 向右滑动 */
+    }
+  </style>
+  <script>
+    /* 按钮 */
+    function slideButton(btn, direction) {
+        if(direction==='weather-clear')rain=false
+        if(direction==='weather-rain')rain=true
+      btn.classList.add(direction);
+      setTimeout(() => {
+        btn.classList.remove(direction);
+      }, 500); // 自定义缓冲时间，这里是0.5秒
+    }
+  </script>
+
     </head>
+
+
 
 
 <body style="color: white;">
@@ -67,6 +103,11 @@
     <br>
     <br>
  
+    
+    <div style="position: absolute;left: 45%;top: 65%;">
+        <button class="slide-button" onclick="slideButton(this, 'weather-clear')" style="color: black;font-weight: bold;">我说天晴</button>
+        <button class="slide-button" onclick="slideButton(this, 'weather-rain')" style="color: black;font-weight:lighter;">我说天阴</button>
+    </div>
 
     <font style="bottom: 10px;left:10px;position: absolute;" id="bottomHead">三分热度，也会有三分收获</font>
 
@@ -104,6 +145,7 @@ document.getElementById("bottomHead").innerHTML = Math.random()>0.3 ? "三分热
 
 
 <script>
+    var rain = true
     const canvas = document.getElementById('rainCanvas');
     const ctx = canvas.getContext('2d');
     let rainDrops = new Set();
@@ -124,7 +166,7 @@ document.getElementById("bottomHead").innerHTML = Math.random()>0.3 ? "三分热
         ctx.clearRect(0,0, canvas.width, canvas.height);
 
 
-        if (Math.random() > 0.55) 
+        if (rain && Math.random() > 0.55) 
             rainDrops.add(createRainDrop());
 
 
