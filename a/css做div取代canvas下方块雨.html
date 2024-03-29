@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+    var awa = Math.random()>0.8;
+    const bunibuni = () => document.documentElement.style.setProperty('--random-duration', awa ? '50vh' : Math.floor(Math.random() * 100) + 'vh'); // 生成1到10秒之间的随机整数值
+    bunibuni()
+
+</script>
+<style>
+  
+    body {
+                          
+        background: #1c1c1c; /* 一个暗色背景 */
+      }
+  
+    /* 定义笑脸方块的基本样式 */
+    .smiling-box {
+      opacity: 0.9;
+      /* size: Math.random() * 30 + 1, */
+      /* width: 100px;
+      height: 100px; */
+      background-color: #fff;
+      /* background-size: contain; */
+      /* background-repeat: no-repeat; */
+      /* background-position: center; */
+      position: absolute;
+      top: 0;
+      
+      /* left: var(--random-duration); */
+      transform: translateY(-10vh);
+      transform: translateX(-10vh);
+      /* transform: translateX(-50%); */
+      animation: dropDown 2s linear forwards; /* 下降动画持续2秒，线性变化，完成后保持状态 */
+    }
+  
+    /* 定义动画关键帧 */
+    @keyframes dropDown {
+      0%{
+        top: 0;
+        opacity: 0.9; /* 开始和结束时都是全透明 */
+      }
+      /* 将方块移动到视窗高度之外，从而离开可视区域 */
+      100% {
+        top: 70vh; 
+        opacity: 0; 
+      transform: translateX(var(--random-duration));
+      }
+    }
+  
+  
+  </style>
+</head>
+<body>
+
+<!-- 笑脸方块元素 -->
+<!-- <div class="smiling-box" ></div> -->
+<script>
+    let i = 0
+    let last = -1
+    setInterval(() => {
+        const d = document.createElement('div')
+        d.setAttribute('class', 'smiling-box '+String(i))
+        const size = Math.random() * 30 + 1+'px;'
+        d.setAttribute('style', 'left: '+ Math.random() * 100+'%;'+'width: '+ size +'height: '+ size)
+        // d.setAttribute('class', String(i))
+    document.body.append(d)
+}, 25);
+    setInterval(() => {
+
+        const d = document.getElementsByClassName(String(last))
+        Array.from(d).forEach(element => {
+            element.remove()
+        });
+        console.log(document.getElementsByClassName('smiling-box').length)
+        last = i++
+}, 3000);
+</script>
+</body>
+</html>
