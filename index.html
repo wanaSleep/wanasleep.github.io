@@ -85,13 +85,13 @@
                 <span class="expand-icon">+</span>
             </div>
             <ul class="hidden-list" id="versionList">
-                <li><a href="/FlashFakePlayerPack/1-21-0-v2-FlashFakePlayerPack.mcpack" download="1-21-0 [自动挖掘更新] 假人模拟玩家.mcpack">1.21.0</a></li>
+                <li><a href="/FlashFakePlayerPack/1-21-0-v2-FlashFakePlayerPack.mcpack" download="1-21-0 [自动挖掘更新] 假人模拟玩家.mcpack">1.21.0 [自动挖掘更新]</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-80-FlashFakePlayerPack.mcpack" download="1-20-80 假人模拟玩家.mcpack">1.20.80</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-70 v1假人模拟玩家.mcpack" download="1-20-70 v1假人模拟玩家.mcpack">1.20.70</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-60 v1 [橘猫献身+万人血书版]假人模拟玩家.mcpack" download="1-20-60 v1 [橘猫献身+万人血书版]假人模拟玩家.mcpack">1.20.60</a></li>
-                <li><a href="/FlashFakePlayerPack/1-20-50 v16 假人【菜就多练特别版】.mcpack" download="1-20-50 v16 假人【菜就多练特别版】.mcpack">1.20.50</a></li>
+                <li><a href="/FlashFakePlayerPack/1-20-50 v16 假人【菜就多练特别版】.mcpack" download="1-20-50 v16 假人【菜就多练特别版】.mcpack">1.20.50 [菜就多练特别版]</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-40 v13 [GUI-好梦更新] 模拟玩家.mcpack" download="1-20-40 v13 [GUI-好梦更新] 模拟玩家.mcpack">1.20.40</a></li>
-                <li><a href="/FlashFakePlayerPack/1-20-30 v10 [ui更新] 假人测试版 .mcpack" download="1-20-30 v10 [ui更新] 假人测试版 .mcpack">1.20.30</a></li>
+                <li><a href="/FlashFakePlayerPack/1-20-30 v10 [ui更新] 假人测试版 .mcpack" download="1-20-30 v10 [ui更新] 假人测试版 .mcpack">1.20.30 [ui更新]</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-10 v160b [测试] 假人 .mcpack" download="1-20-10 v160b [测试] 假人 .mcpack">1.20.10</a></li>
                 <li><a href="/FlashFakePlayerPack/1-20-0 v141b 假人就是模拟玩家 .mcpack" download="1-20-0 v141b 假人就是模拟玩家.mcpack">1.20.0</a></li>
                 
@@ -117,6 +117,17 @@
 
 <script>
 
+document.addEventListener('DOMContentLoaded', function() {
+    // 获取页面上所有的.list-header元素
+    var headers = document.querySelectorAll('.list-header');
+    
+    // 检查是否有.list-header元素存在
+    if (headers.length > 0) {
+        // 触发第一个.list-header元素的click事件
+        headers[0].click(); // 这将调用toggleList函数
+    }
+});
+    
 const awa = Math.random()>0.5;
 const bunibuni = () => document.documentElement.style.setProperty('--random-duration', awa ? '0.5s' : Math.floor(Math.random() * 10) + 's'); // 生成1到10秒之间的随机整数值
 
